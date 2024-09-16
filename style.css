@@ -1,8 +1,22 @@
+.body
+{
+    display: flex;
+}
+
+.team_official_info
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    color: rgb(12, 11, 11);
+    font-family: 'Times New Roman', Times, serif;
+}
+
 .batters
 {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    padding: 20px;
 }
 
 .batter
@@ -11,6 +25,7 @@
     flex-wrap: wrap;
     gap: 10px;
     display: flex;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .all-rounders
@@ -18,6 +33,7 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    padding: 20px;
 }
 
 .all-rounder
@@ -26,6 +42,7 @@
     flex-wrap: wrap;
     gap: 10px;
     display: flex;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .bowlers
@@ -33,6 +50,7 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    padding: 20px;
 }
 
 .bowler
@@ -41,9 +59,29 @@
     flex-wrap: wrap;
     gap: 10px;
     display: flex;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .team
 {
     flex-direction: column;
+}
+
+h1
+{
+    padding: 10px;
+    text-align: center;
+    background-color: #0a013c;
+    color: aliceblue;
+}
+
+h2
+{
+    padding: 5px;
+    background-color: #19398a;
+    color: aliceblue;
+}
+
+*{
+    background-color: rgb(186, 220, 226);
 }
