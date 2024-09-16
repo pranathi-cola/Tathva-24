@@ -1,0 +1,49 @@
+.batters
+{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.batter
+{
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    display: flex;
+}
+
+.all-rounders
+{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.all-rounder
+{
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    display: flex;
+}
+
+.bowlers
+{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.bowler
+{
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    display: flex;
+}
+
+.team
+{
+    flex-direction: column;
+}
