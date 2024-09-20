@@ -63,8 +63,7 @@ async function fetchTeamResults() {
 		newelem.textContent = "Scores";
 		team.appendChild(newelem);
 		let l = result["DATA"].length-1;
-		console.log(result);
-		for(let i=result["DATA"][l]["EVENTS"].length-1; i>result["DATA"][l]["EVENTS"].length - 6; --i)
+		for(let i=result["DATA"][l]["EVENTS"].length-1; i>result["DATA"][l]["EVENTS"].length - 6 && i>=0; --i)
 		{
 			const addelem = document.createElement("p");
 			addelem.textContent = result["DATA"][l]["EVENTS"][i]["AWAY_PARTICIPANT_NAME_ONE"] + " (" + result["DATA"][l]["EVENTS"][i]["AWAY_SCORE_CURRENT"] + "-" + result["DATA"][l]["EVENTS"][i]["AWAY_SCORE_PART_2_OVERS_OUTS_WICKETS"] + ") VS " + result["DATA"][l]["EVENTS"][i]["HOME_PARTICIPANT_NAME_ONE"]  + " (" + result["DATA"][l]["EVENTS"][i]["HOME_SCORE_CURRENT"] + "-" + result["DATA"][l]["EVENTS"][i]["HOME_SCORE_PART_2_OVERS_OUTS_WICKETS"] + ")";
@@ -78,3 +77,42 @@ async function fetchTeamResults() {
 
 // Call the function
 fetchTeamResults();
+
+async function getNews() {
+	const url = 'https://flashlive-sports.p.rapidapi.com/v1/teams/news?locale=en_INT&team_id=2eZPzJH2';
+	const options = {
+		method: 'GET',
+		headers: {
+			'x-rapidapi-key': '03bf06295dmsh1c6ff7ed0276818p1853a7jsnf715d5533b13',
+			'x-rapidapi-host': 'flashlive-sports.p.rapidapi.com'
+		}
+	};
+
+	try {
+		const response = await fetch(url, options);
+		const result = await response.json();
+		const news = document.querySelector(".news");
+		const newelem = document.createElement("h2");
+		newelem.textContent = "Latest News";
+		news.appendChild(newelem);
+		for(let i=0; i<result["DATA"].length-1 && i<3; ++i)
+		{
+			const newdiv = document.createElement("div");
+			newdiv.className = "news-sub";
+			const addelem = document.createElement("p");
+			addelem.textContent = result["DATA"][i]["TITLE"];
+			addelem.className = "team_official_info";
+			const addalink = document.createElement("a");
+			addalink.href = result["DATA"][i]["LINK"];
+			addalink.textContent = "Open Link";
+			addalink.className = "team-official-info";
+			newdiv.appendChild(addelem);
+			newdiv.appendChild(addalink);
+			news.appendChild(newdiv);
+		}
+	} catch (error) {
+		alert("Error!");
+	}
+}
+
+getNews();
