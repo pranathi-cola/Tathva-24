@@ -85,3 +85,10 @@ h2
 *{
     background-color: rgb(186, 220, 226);
 }
+
+.news-sub
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
