@@ -79,12 +79,12 @@ async function fetchTeamResults() {
 fetchTeamResults();
 
 async function getNews() {
-	const url = 'https://flashlive-sports.p.rapidapi.com/v1/teams/news?locale=en_INT&team_id=2eZPzJH2';
+	const url = 'https://cricbuzz-cricket.p.rapidapi.com/news/v1/team/62';
 	const options = {
 		method: 'GET',
 		headers: {
 			'x-rapidapi-key': '03bf06295dmsh1c6ff7ed0276818p1853a7jsnf715d5533b13',
-			'x-rapidapi-host': 'flashlive-sports.p.rapidapi.com'
+			'x-rapidapi-host': 'cricbuzz-cricket.p.rapidapi.com'
 		}
 	};
 
@@ -96,20 +96,30 @@ async function getNews() {
 		const newelem = document.createElement("h2");
 		newelem.textContent = "Latest News";
 		news.appendChild(newelem);
-		for(let i=0; i<result["DATA"].length-1 && i<3; ++i)
+		let n = 3;
+		for(let i=0; i<result["storyList"].length && i<n; ++i)
 		{
-			const newdiv = document.createElement("div");
-			newdiv.className = "news-sub";
-			const addelem = document.createElement("p");
-			addelem.textContent = result["DATA"][i]["TITLE"];
-			addelem.className = "team_official_info";
-			const addalink = document.createElement("a");
-			addalink.href = result["DATA"][i]["LINK"];
-			addalink.textContent = "Open Link";
-			addalink.className = "team-official-info";
-			newdiv.appendChild(addelem);
-			newdiv.appendChild(addalink);
-			news.appendChild(newdiv);
+			try{
+				console.log(i);
+				const newdiv = document.createElement("div");
+				newdiv.className = "news-sub";
+				const addelem = document.createElement("h3");
+				addelem.textContent = result["storyList"][i]["story"]["hline"];
+				addelem.className = "team_official_info";
+				const addalink = document.createElement("p");
+				addalink.textContent = result["storyList"][i]["story"]["intro"];
+				addalink.className = "team-official-info";
+				newdiv.appendChild(addelem);
+				newdiv.appendChild(addalink);
+				news.appendChild(newdiv);
+			}
+			catch (error)
+			{
+				console.log(i);
+				n++;
+				console.log(i);
+				console.log(n);
+			}
 		}
 	} catch (error) {
 		alert("Error!");
