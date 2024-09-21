@@ -46,27 +46,27 @@ fetch(url, options)
 
 
 async function fetchTeamResults() {
-	const url = 'https://flashlive-sports.p.rapidapi.com/v1/teams/results?sport_id=13&locale=en_IN&team_id=2eZPzJH2';
+	const url = 'https://cricbuzz-cricket.p.rapidapi.com/teams/v1/62/results';
 	const options = {
 		method: 'GET',
 		headers: {
 			'x-rapidapi-key': '03bf06295dmsh1c6ff7ed0276818p1853a7jsnf715d5533b13',
-			'x-rapidapi-host': 'flashlive-sports.p.rapidapi.com'
+			'x-rapidapi-host': 'cricbuzz-cricket.p.rapidapi.com'
 		}
 	};
 
 	try {
 		const response = await fetch(url, options);
 		const result = await response.json();
+		console.log(result);
 		const team = document.querySelector("#team-details");
 		const newelem = document.createElement("h2");
 		newelem.textContent = "Scores";
 		team.appendChild(newelem);
-		let l = result["DATA"].length-1;
-		for(let i=result["DATA"][l]["EVENTS"].length-1; i>result["DATA"][l]["EVENTS"].length - 6 && i>=0; --i)
+		for(let i=0; i<5 && i<result["teamMatchesData"][0]["matchDetailsMap"]["match"].length; ++i)
 		{
 			const addelem = document.createElement("p");
-			addelem.textContent = result["DATA"][l]["EVENTS"][i]["AWAY_PARTICIPANT_NAME_ONE"] + " (" + result["DATA"][l]["EVENTS"][i]["AWAY_SCORE_CURRENT"] + "-" + result["DATA"][l]["EVENTS"][i]["AWAY_SCORE_PART_2_OVERS_OUTS_WICKETS"] + ") VS " + result["DATA"][l]["EVENTS"][i]["HOME_PARTICIPANT_NAME_ONE"]  + " (" + result["DATA"][l]["EVENTS"][i]["HOME_SCORE_CURRENT"] + "-" + result["DATA"][l]["EVENTS"][i]["HOME_SCORE_PART_2_OVERS_OUTS_WICKETS"] + ")";
+			addelem.textContent = result["teamMatchesData"][0]["matchDetailsMap"]["match"][i]["matchInfo"]["team1"]["teamName"] + " (" + result["teamMatchesData"][0]["matchDetailsMap"]["match"][i]["matchScore"]["team1Score"]["inngs1"]["runs"] + "-" + result["teamMatchesData"][0]["matchDetailsMap"]["match"][i]["matchScore"]["team1Score"]["inngs1"]["wickets"] + ") VS " + result["teamMatchesData"][0]["matchDetailsMap"]["match"][i]["matchInfo"]["team2"]["teamName"]  + " (" + result["teamMatchesData"][0]["matchDetailsMap"]["match"][i]["matchScore"]["team2Score"]["inngs1"]["runs"] + "-" + result["teamMatchesData"][0]["matchDetailsMap"]["match"][i]["matchScore"]["team2Score"]["inngs1"]["wickets"] + ")";
 			addelem.className = "team_official_info";
 			team.appendChild(addelem);
 		}
@@ -91,6 +91,7 @@ async function getNews() {
 	try {
 		const response = await fetch(url, options);
 		const result = await response.json();
+		console.log(result);
 		const news = document.querySelector(".news");
 		const newelem = document.createElement("h2");
 		newelem.textContent = "Latest News";
@@ -116,3 +117,39 @@ async function getNews() {
 }
 
 getNews();
+
+/*async function playerstats() {
+	const url = 'https://cricbuzz-cricket.p.rapidapi.com/teams/v1/62/players';
+	const options = {
+		method: 'GET',
+		headers: {
+			'x-rapidapi-key': '03bf06295dmsh1c6ff7ed0276818p1853a7jsnf715d5533b13',
+			'x-rapidapi-host': 'cricbuzz-cricket.p.rapidapi.com'
+		}
+	};
+	try {
+		const response = await fetch(url, options);
+		const result = await response.text();
+		return result;
+	} catch (error) {
+		alert("Error!");
+	}
+}
+
+const button = document.querySelectorAll(".my_button");
+
+function handleButtonClick(event) {
+	const button_i = event.target;
+	const result = playerstats();
+	const parent = button_i.parentNode;
+	console.log(result);
+	const player = parent.children[1].textContent;
+	console.log(typeof(result));
+	console.log(typeof(result[0]));
+	console.log(typeof(result[1]));
+	console.log(typeof(result[2]));
+}
+
+button.forEach(button_i => {
+	button_i.addEventListener('click', handleButtonClick);
+});*/
